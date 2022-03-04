@@ -17,20 +17,14 @@ typedef unsigned long bitset_t[];
 // INITIALIZES SET WITH GIVEN NAME AND SIZE
 // PARAMS: set_name - Name of the bit set |
 //         size - Size of the bit set
-#ifdef USE_INLINE
-    static inline void bitset_create(bitset_t set_name, unsigned long size) {
 
-    }
-#else
-    #define bitset_create(set_name, size)
-#endif
+#define bitset_create(set_name, size) set_name[(size / (BYTE_SIZE * sizeof(unsigned long))) + \
+                                    (size % (BYTE_SIZE * sizeof(unsigned long))) ? 1 : 0] = { size };
 
 // ALLOCATES MEMORY FOR SET WITH GIVEN NAME AND SIZE
 // PARAMS: set_name - Name of the bit set |
 //         size - Size of the bit set
-void bitset_alloc(bitset_t set_name, unsigned long size) {
-    // TODO
-}
+#define bitset_alloc(set_name, size) // TODO
 
 // FREES ALLOCATED MEMORY FOR SET OF GIVEN NAME
 // PARAMS: set_name - Name of the bit set

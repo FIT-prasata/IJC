@@ -12,6 +12,6 @@
 
 // Eratosthenes algorithm function
 // Print last 10 prime numbers from the given range, each on a new line in ascending order
-void Eratosthenes(bitset_t pole) {
+void Eratosthenes(bitset_t set_name) {
     // TODO
 }

@@ -10,4 +10,4 @@
 
 #include "bitset.h"
 
-void Eratosthenes(bitset_t pole);
+void Eratosthenes(bitset_t set_name);
