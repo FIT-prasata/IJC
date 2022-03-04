@@ -13,4 +13,9 @@ gcc -m32
 
 ### Create first version of make file
 ### MACRO/INLINE functions in bitset.h based on USE_INLINE flag in makefile
+
+```bash
+gcc -DUSE_INLINE
+```
+
 ### Implement the Eratosthenes algorithm on a small number of inputs (+- 100)
