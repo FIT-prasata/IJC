@@ -8,6 +8,8 @@
 // Git repository: https://github.com/lukaszavadil1/IJC
 
 #include <stdio.h>
+#include "error.h"
+#include <stdlib.h>
 
 #define USE_INLINE true
 #define BYTE_SIZE 8
@@ -18,15 +20,15 @@ typedef unsigned long bitset_t[];
 // PARAMS: set_name - Name of the bit set |
 //         size - Size of the bit set
 
-#define bitset_create(set_name, size) set_name[(size / (BYTE_SIZE * sizeof(unsigned long))) + \
-                                    ((size % (BYTE_SIZE * sizeof(unsigned long))) ? 1 : 0) + 1] = { size };
+#define bitset_create(set_name, size) unsigned long set_name[(size / (BYTE_SIZE * sizeof(unsigned long))) + \
+                                    ((size % (BYTE_SIZE * sizeof(unsigned long))) ? 1 : 0) + 1] = { size }
 
 // ALLOCATES MEMORY FOR SET WITH GIVEN NAME AND SIZE
 // PARAMS: set_name - Name of the bit set |
 //         size - Size of the bit set
 #define bitset_alloc(set_name, size) unsigned long *set_name = calloc((size / (BYTE_SIZE * sizeof(unsigned long))) + \
                                     ((size % (BYTE_SIZE * sizeof(unsigned long))) ? 1 : 0) + 1, sizeof(unsigned long)); \
-                                    if (set_name == NULL) {printf("Chyba při alokaci paměti")}; \
+                                    if (set_name == NULL) { printf("Chyba při alokaci paměti"); }; \
                                     *set_name = size;
 
 // FREES ALLOCATED MEMORY FOR SET OF GIVEN NAME
@@ -40,7 +42,7 @@ typedef unsigned long bitset_t[];
 // RETURNS THE SIZE OF SET WITH GIVEN NAME
 // PARAMS: set_name - Name of the bit set
 #ifdef USE_INLINE
-    static inline void bitset_size(bitset_t set_name) { set_name[0]; }
+    unsigned long bitset_size(bitset_t set_name) { return set_name[0]; }
 #else
     #define bitset_size(set_name) set_name[0];
 #endif
@@ -68,7 +70,7 @@ typedef unsigned long bitset_t[];
 // PARAMS: set_name - Name of the bit set |
 //         index - Index for getting bit
 #ifdef USE_INLINE
-    static inline void bitset_getbit(bitset_t set_name, long index) {
+    unsigned long bitset_getbit(bitset_t set_name, long index) {
         return set_name[(index / (sizeof(unsigned long) * BYTE_SIZE)) + 1]
         & (1 << (index % (sizeof(unsigned long) * BYTE_SIZE))); 
     }

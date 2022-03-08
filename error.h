@@ -8,3 +8,6 @@
 // Git repository: https://github.com/lukaszavadil1/IJC
 
 
+void warning_msg(const char *fmt, ...);
+
+void error_exit(const char *fmt, ...);
