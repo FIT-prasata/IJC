@@ -42,7 +42,7 @@ typedef unsigned long bitset_t[];
 // RETURNS THE SIZE OF SET WITH GIVEN NAME
 // PARAMS: set_name - Name of the bit set
 #ifdef USE_INLINE
-    unsigned long bitset_size(bitset_t set_name) { return set_name[0]; }
+    static inline unsigned long bitset_size(bitset_t set_name) { return set_name[0]; }
 #else
     #define bitset_size(set_name) set_name[0];
 #endif
@@ -70,7 +70,7 @@ typedef unsigned long bitset_t[];
 // PARAMS: set_name - Name of the bit set |
 //         index - Index for getting bit
 #ifdef USE_INLINE
-    unsigned long bitset_getbit(bitset_t set_name, long index) {
+    static inline unsigned long bitset_getbit(bitset_t set_name, long index) {
         return set_name[(index / (sizeof(unsigned long) * BYTE_SIZE)) + 1]
         & (1 << (index % (sizeof(unsigned long) * BYTE_SIZE))); 
     }

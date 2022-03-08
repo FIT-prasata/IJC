@@ -12,11 +12,17 @@
 
 int main(void) {
     bitset_alloc(set_name, 100);
-    eratosthenes(set_name);
-    for (int i = 2; i < set_name[0]; i++) {
-        if (bitset_get(set_name, i) == 0) {
-            printf("%lu\n", i);
+    Eratosthenes(set_name);
+    int last_primes = 10;
+    for (unsigned long int i = bitset_size(set_name)-1; i >= 2; i--) {
+        if (last_primes > 0) {
+            if (bitset_getbit(set_name, i) == 0) {
+                printf("%lu\n", i);
+                last_primes--;
+            }
         }
+        else break;
+
     }
     free(set_name);
     return 0;
