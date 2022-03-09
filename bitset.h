@@ -13,6 +13,8 @@
 #include <assert.h>
 #include <limits.h>
 
+#define USE_INLINE true
+
 typedef unsigned long bitset_t[];
 typedef unsigned long bitset_index_t;
 
@@ -36,7 +38,7 @@ typedef unsigned long bitset_index_t;
 // FREES ALLOCATED MEMORY FOR SET OF GIVEN NAME
 // PARAMS: set_name - Name of the bit set
 #ifdef USE_INLINE
-    static inline void bitset_free(bitset_t set_name) { free(set_name); }
+    inline void bitset_free(bitset_t set_name) { free(set_name); }
 #else
     #define bitset_free(set_name) free(set_name)
 #endif
@@ -44,7 +46,7 @@ typedef unsigned long bitset_index_t;
 // RETURNS THE SIZE OF SET WITH GIVEN NAME
 // PARAMS: set_name - Name of the bit set
 #ifdef USE_INLINE
-    static inline unsigned long bitset_size(bitset_t set_name) { return set_name[0]; }
+    inline unsigned long bitset_size(bitset_t set_name) { return set_name[0]; }
 #else
     #define bitset_size(set_name) set_name[0]
 #endif
@@ -54,14 +56,20 @@ typedef unsigned long bitset_index_t;
 //         index - Index for setting bit |
 //         expression - if 0 -> set bit value to 0, else set bit value to 1
 #ifdef USE_INLINE
-    static inline void bitset_setbit(bitset_t set_name, bitset_index_t index, int expression) {
-        if (expression != 0) {
-            set_name[(index / (sizeof(unsigned long) * CHAR_BIT)) + 1]
-            |= (1 << (index % (sizeof(unsigned long) * CHAR_BIT)));
+    inline void bitset_setbit(bitset_t set_name, bitset_index_t index, int expression) {
+        if (index < bitset_size(set_name)) {
+            if (expression != 0) {
+                set_name[(index / (sizeof(unsigned long) * CHAR_BIT)) + 1]
+                |= (1 << (index % (sizeof(unsigned long) * CHAR_BIT)));
+            }
+            else {
+                set_name[(index / (sizeof(unsigned long) * CHAR_BIT)) + 1]
+                &= ~(1 << (index % (sizeof(unsigned long) * CHAR_BIT)));
+            }
         }
         else {
-            set_name[(index / (sizeof(unsigned long) * CHAR_BIT)) + 1]
-            &= ~(1 << (index % (sizeof(unsigned long) * CHAR_BIT)));
+            error_exit("bitset_setbit: Index %lu mimo rozsah 0..%lu",
+               (unsigned long)index, (unsigned long)bitset_size(set_name));
         }
     }
 #else
@@ -80,9 +88,16 @@ typedef unsigned long bitset_index_t;
 // PARAMS: set_name - Name of the bit set |
 //         index - Index for getting bit
 #ifdef USE_INLINE
-    static inline unsigned long bitset_getbit(bitset_t set_name, bitset_index_t index) {
-        return set_name[(index / (sizeof(unsigned long) * CHAR_BIT)) + 1]
-        & (1 << (index % (sizeof(unsigned long) * CHAR_BIT))); 
+    inline unsigned long bitset_getbit(bitset_t set_name, bitset_index_t index) {
+        if (index < bitset_size(set_name)) {
+            return set_name[(index / (sizeof(unsigned long) * CHAR_BIT)) + 1]
+            & (1 << (index % (sizeof(unsigned long) * CHAR_BIT))); 
+        }
+        else {
+            error_exit("bitset_getbit: Index %lu mimo rozsah 0..%lu",
+               (unsigned long)index, (unsigned long)bitset_size(set_name));
+            return 1;
+        }
     }
 #else
     #define bitset_getbit(set_name, index) \
