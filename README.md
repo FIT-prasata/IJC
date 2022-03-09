@@ -12,10 +12,18 @@ gcc -m32
 ```
 
 ### Create first version of make file
-### MACRO/INLINE functions in bitset.h based on USE_INLINE flag in makefile
 
 ```bash
 gcc -DUSE_INLINE
 ```
+### Stack expand for Windows
 
-### Implement the Eratosthenes algorithm on a small number of inputs (+- 100)
+```bash
+gcc -Wl,--stack,38000000
+```
+
+### Final version
+
+```bash
+gcc -g -std=c11 -pedantic -Wall -Wextra -O2 -lm -Wl,--stack,38000000 bitset.c error.c eratosthenes.c primes.c -o primes
+```

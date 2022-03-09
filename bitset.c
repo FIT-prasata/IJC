@@ -9,5 +9,8 @@
 
 #include "bitset.h"
 
-extern inline void bitset_free(bitset_t set_name);
-extern inline void bitset_setbit(bitset_t set_name, long index, int expression);
+#ifdef USE_INLINE
+    extern inline unsigned long bitset_size(bitset_t set_name);
+    extern inline void bitset_setbit(bitset_t set_name, bitset_index_t index, int expression);
+    extern inline unsigned long bitset_getbit(bitset_t set_name, bitset_index_t index);
+#endif
