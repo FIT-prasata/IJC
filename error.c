@@ -7,11 +7,10 @@
 // Compiled: gcc (GCC) 9.2.0
 // Git repository: https://github.com/lukaszavadil1/IJC
 
-#include <stdarg.h>
+// LOCAL INCLUDES
 #include "error.h"
-#include <stdio.h>
-#include <stdlib.h>
 
+// Error handling function
 void warning_msg(const char *fmt, ...) {
     va_list msg;
     va_start(msg, fmt);
@@ -20,6 +19,7 @@ void warning_msg(const char *fmt, ...) {
     va_end(msg);
 }
 
+// Error handling function with return value 1
 void error_exit(const char *fmt, ...) {
     va_list msg;
     va_start(msg, fmt);

@@ -7,6 +7,10 @@
 // Compiled: gcc (GCC) 9.2.0
 // Git repository: https://github.com/lukaszavadil1/IJC
 
+// EXTERNAL INCLUDES
+#include <stdarg.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 void warning_msg(const char *fmt, ...);
 
