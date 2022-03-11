@@ -5,7 +5,11 @@ Compilation: gcc -g -std=c11 -pedantic -Wall -Wextra (optional -fsanitize=addres
 
 ## TASK A DONE
 
-### Time 1.88s on AMD Ryzen 5 3500U using macros, 1.96s using inline functions
+### Times:
+
+1.88s on AMD Ryzen 5 3500U using macros
+
+1.96s using inline functions
 
 ### Without optimalization, slower than -O2
 
