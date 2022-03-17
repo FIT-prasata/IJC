@@ -44,7 +44,9 @@ int main(void) {
     for (int j = counter-1; j >= 0; j--) {
         printf("%d\n", primes_arr[j]);
     }
+    // Print execution time of the program
     fprintf(stderr, "Time=%.3g\n", (double)(clock()-start)/CLOCKS_PER_SEC);
+
     free(set_name);
     return 0;
 }

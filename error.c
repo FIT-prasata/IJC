@@ -10,7 +10,7 @@
 // LOCAL INCLUDES
 #include "error.h"
 
-// Error handling function
+// Error handling function with warning message
 void warning_msg(const char *fmt, ...) {
     va_list msg;
     va_start(msg, fmt);
