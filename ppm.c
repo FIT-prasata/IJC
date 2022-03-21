@@ -7,22 +7,26 @@
 // Compiled: gcc (GCC) 9.2.0
 // Git repository: https://github.com/lukaszavadil1/IJC
 
+// DEFINES
+#define BUFFER_SIZE 3
+
 // LOCAL INCLUDES
 #include "ppm.h"
 #include "error.h"
 
+// PARAMS: filename - Name of the file
 struct ppm * ppm_read(const char * filename) {
 
     struct ppm *p;
-    unsigned xsize, ysize;
-    char format[3];
+    unsigned xsize, ysize, color_range;
+    char format[BUFFER_SIZE];
 
+    // Open binary file in read mode 
     FILE * f = fopen(filename, "rb");
     
     // Check if path to file is correct
     if (f == NULL) { 
         warning_msg("ppm_read: Nelze otevrit soubor %s", filename);
-        fclose(f);
         return NULL;
     }
 
@@ -44,33 +48,41 @@ struct ppm * ppm_read(const char * filename) {
         return NULL;
     }
 
+    // Read size values and color range
+    fscanf(f, "%u %u %u", &xsize, &ysize, &color_range);
+
     // Check if image size is not exceeding the limit of (8000 * 8000 * 3)
-    fscanf(f, "%u %u", &xsize, &ysize);
     if ((xsize * ysize * 3) > SIZE_LIMIT) {
         fclose(f);
-        error_exit("ppm_read: Velikost souboru je vetsi nez pevne zadany limit");
+        warning_msg("ppm_read: Velikost souboru je vetsi nez pevne zadany limit");
     }
-    // Struct init
+
+    // Skip the '\n' character
+    while (fgetc(f) != '\n');
+
+    // Struct memory alloc
     p = malloc((xsize * ysize * 3) + sizeof(struct ppm));
     if (p == NULL) {
         fclose(f);
         error_exit("ppm_read: Chyba alokace pameti");
     }
+
+    // Set struct size values
     p->xsize = xsize;
     p->ysize = ysize;
-
-    fscanf(f, "%*d");
 
     // Check if size defined in file header is matching the actual size of the file
     if (fread(p->data, sizeof(char), p->xsize * p->ysize * 3, f) != p->xsize * p->ysize * 3) {
         fclose(f);
-        free(p);
+        ppm_free(p);
         error_exit("ppm_read: Velikost dat v souboru se neshoduje s daty v hlavicce");
     }
+
     fclose(f);
     return p;
 }
 
+// Free the structure
 void ppm_free(struct ppm *p) {
     free(p);
 }
