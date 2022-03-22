@@ -23,7 +23,7 @@ int main(void) {
     clock_t start;
     start = clock();
     
-    // Set init
+    // Bitset init
     bitset_alloc(set_name, PRIMES_RANGE);
 
     Eratosthenes(set_name);
@@ -34,7 +34,6 @@ int main(void) {
     for (bitset_index_t i = bitset_size(set_name)-1; i >= SMALLEST_PRIME; i--) {
         if (bitset_getbit(set_name, i) == 0) {
             primes_arr[counter++] = i;
-
             if (counter == PRIMES_AMOUNT) {
                 break;
             }
@@ -48,5 +47,6 @@ int main(void) {
     fprintf(stderr, "Time=%.3g\n", (double)(clock()-start)/CLOCKS_PER_SEC);
 
     free(set_name);
+    
     return 0;
 }

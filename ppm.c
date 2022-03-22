@@ -48,7 +48,7 @@ struct ppm * ppm_read(const char * filename) {
         return NULL;
     }
 
-    // Read size values and color range
+    // Read size values and color range 
     fscanf(f, "%u %u %u", &xsize, &ysize, &color_range);
 
     // Check if image size is not exceeding the limit of (8000 * 8000 * 3)
@@ -57,7 +57,7 @@ struct ppm * ppm_read(const char * filename) {
         warning_msg("ppm_read: Velikost souboru je vetsi nez pevne zadany limit");
     }
 
-    // Skip the '\n' character
+    // Skip the '\n' character so that the next fread() reads wanted file data
     while (fgetc(f) != '\n');
 
     // Struct memory alloc

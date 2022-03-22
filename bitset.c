@@ -10,7 +10,7 @@
 // LOCAL INCLUDES
 #include "bitset.h"
 
-// EXTERN DEFINITIONS
+// Extern definitions in order to work properly with -O0 flag
 #ifdef USE_INLINE
     extern inline unsigned long bitset_size(bitset_t set_name);
     extern inline void bitset_setbit(bitset_t set_name, bitset_index_t index, int expression);

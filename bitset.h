@@ -20,14 +20,14 @@
 typedef unsigned long bitset_t[];
 typedef unsigned long bitset_index_t;
 
-// INITIALIZES SET WITH GIVEN NAME AND SIZE
+// Initializes set of given name and size
 // PARAMS: set_name - Name of the bit set |
 //         size - Size of the bit set
 #define bitset_create(set_name, size) static_assert(size > 0, "Velikost pole musí být větší než 0"); \
             unsigned long set_name[ (size / (CHAR_BIT * sizeof(unsigned long))) + \
             ((size % (CHAR_BIT * sizeof(unsigned long))) ? 1 : 0) + 1 ] = { size }
 
-// ALLOCATES MEMORY FOR SET WITH GIVEN NAME AND SIZE
+// Allocates memory for set of given name and size
 // PARAMS: set_name - Name of the bit set |
 //         size - Size of the bit set
 #define bitset_alloc(set_name, size) assert(size > 0); \
@@ -38,7 +38,7 @@ typedef unsigned long bitset_index_t;
             }; \
             *set_name = size;
 
-// FREES ALLOCATED MEMORY FOR SET OF GIVEN NAME
+// Frees alocated memory for set of given name
 // PARAMS: set_name - Name of the bit set
 #ifdef USE_INLINE
     inline void bitset_free(bitset_t set_name) { free(set_name); }
@@ -46,7 +46,7 @@ typedef unsigned long bitset_index_t;
     #define bitset_free(set_name) free(set_name)
 #endif
 
-// RETURNS THE SIZE OF SET WITH GIVEN NAME
+// Returns the size of set of given name
 // PARAMS: set_name - Name of the bit set
 #ifdef USE_INLINE
     inline unsigned long bitset_size(bitset_t set_name) { return set_name[0]; }
@@ -54,7 +54,7 @@ typedef unsigned long bitset_index_t;
     #define bitset_size(set_name) set_name[0]
 #endif
 
-// SETS THE VALUE OF BIT IN BIT SET
+// Sets the value of bit in bitset
 // PARAMS: set_name - Name of the bit set |
 //         index - Index for setting bit |
 //         expression - if 0 -> set bit value to 0, else set bit value to 1
@@ -87,7 +87,7 @@ typedef unsigned long bitset_index_t;
             }
 #endif
 
-// GETS THE VALUE OF BIT IN BIT SET
+// Gets the value of bit in bit set
 // PARAMS: set_name - Name of the bit set |
 //         index - Index for getting bit
 #ifdef USE_INLINE

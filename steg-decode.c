@@ -17,16 +17,16 @@
 
 // DEFINES
 #define HEX_ONE 0x01
+#define HEX_ZERO 0x00
 #define START_INDEX 29
 
 int main(int argc, char* argv[]) {
     if (argc == 2) {
         unsigned long bit_shift = 0, is_valid_string = 0;
-        char secret_message[1] = {0};
+        char secret_message[1] = {HEX_ZERO};
 
         // Struct init
-        struct ppm *p;
-        p = ppm_read(argv[1]);
+        struct ppm *p = ppm_read(argv[1]);
 
         // Bit set init
         bitset_alloc(set_name, p->xsize * p->ysize * 3);
@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
                 if ((bit_shift % CHAR_BIT) == 0) {
                     bit_shift = 0;
 
-                    // Validates string if char == '\0'
+                    // Validates string if its last char == '\0'
                     if (*secret_message == 0) {
                         is_valid_string = 1;
                         break;
@@ -51,7 +51,7 @@ int main(int argc, char* argv[]) {
 
                     // Prints character to stdout and resets secret_message
                     putchar(*secret_message);
-                    *secret_message = 0;
+                    *secret_message = HEX_ZERO;
                 }
             }
         }
@@ -63,7 +63,7 @@ int main(int argc, char* argv[]) {
                 error_exit("main: Nenalezen konec retezce");
         }
 
-        // New line for linux
+        // New line after secret message for linux
         putchar('\n');
 
         // Free allocated memory

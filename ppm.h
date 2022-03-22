@@ -25,5 +25,4 @@ struct ppm {
 
 struct ppm * ppm_read(const char * filename);
 
-// Frees memory allocated in ppm_read
 void ppm_free(struct ppm *p);
