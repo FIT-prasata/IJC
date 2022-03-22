@@ -3,7 +3,9 @@ My solution to IJC projects
 
 Compilation: gcc -g -std=c11 -pedantic -Wall -Wextra (optional -fsanitize=address for memory check)
 
-## TASK A DONE
+## TASK A
+
+Print the last 10 prime numbers from 300 milion number range using bit field to use minimal amount of memory
 
 ### Times for task A:
 
@@ -11,7 +13,49 @@ Compilation: gcc -g -std=c11 -pedantic -Wall -Wextra (optional -fsanitize=addres
 
 1.96s using inline functions
 
-## TASK  B DONE
+### Task A build on Windows
+
+Automated build and run of both primes file versions
+
+```bash
+make win-run
+```
+
+OR
+
+```bash
+make
+
+primes.exe
+
+primes-i.exe
+```
+
+for automated build and manual run option
+
+### Task A build on Linux
+
+Automated build and run of both primes file versions
+
+```bash
+make run
+```
+
+OR
+
+```bash
+make
+
+./primes
+
+./primes-i
+```
+
+for automated build and manual run option
+
+## TASK B
+
+Decode a secret message from the .ppm file using Eratosthenes algorithm from task A 
 
 ### Task B secret message
 
@@ -21,50 +65,45 @@ Používáme metodu podobnou steganografii - viz
 
 http://en.wikipedia.org/wiki/Steganography
 
-### Without optimalization, slower than -O2
+### Task B build on Windows
 
 ```bash
-gcc -O0
+make
+
+steg-decode.exe {filename}.ppm
 ```
 
-### Might need to switch to UTF-8 for task B to work properly
+### Task B build on Linux
+
+```bash
+make
+
+./steg-decode {filename}.ppm
+```
+
+## Useful stuff
+
+### Test correctness of prime numbers
+
+Works only on Linux
+
+```bash
+./primes | factor
+```
+
+OR
+
+```bash
+./primes-i | factor
+```
+
+### Might need to switch to UTF-8 encoding for task B to work properly
 
 ```bash
 chcp 65001
 ```
 
-### How to start task A without make file on WINDOWS
-
+### It is a good practice to clean .o files after yourself
 ```bash
-gcc -g -std=c11 -pedantic -Wall -Wextra -O2 -lm -Wl,--stack,38000 bitset.c error.c eratosthenes.c primes.c -o primes
-
-primes.exe
+make clean
 ```
-
-### How to start task A without make file on LINUX
-
-```bash
-gcc -g -std=c11 -pedantic -Wall -Wextra -O2 -lm ulimit -s 40000 bitset.c error.c eratosthenes.c primes.c -o primes
-
-./primes
-```
-
-### How to start task B without make file on WINDOWS
-
-```bash
-gcc -g -std=c11 -pedantic -Wall -Wextra -O2 -lm error.c eratosthenes.c steg-decode.c ppm.c -o steg-decode
-
-steg-decode {filename}.ppm
-```
-
-### How to start task B without make file on WINDOWS
-
-```bash
-gcc -g -std=c11 -pedantic -Wall -Wextra -O2 -lm error.c eratosthenes.c steg-decode.c ppm.c -o steg-decode
-
-./steg-decode {filename}.ppm
-```
-
-## TODO:
-
-### Make file :)
