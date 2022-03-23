@@ -11,9 +11,9 @@
 #include "eratosthenes.h"
 
 // Eratosthenes algorithm function
-// Print last 10 prime numbers from the given range, each on a new line in ascending order
+// Sets non prime numbers indexes in bitset to 1
 void Eratosthenes(bitset_t set_name) {
-    
+
     // Pre-setting numbers 0 and 1 as non prime
     bitset_setbit(set_name, 0, 1);
     bitset_setbit(set_name, 1, 1);

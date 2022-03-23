@@ -14,6 +14,7 @@
 #include "ppm.h"
 #include "error.h"
 
+// Returns structure with x and y size of ppm image and raw data
 // PARAMS: filename - Name of the file
 struct ppm * ppm_read(const char * filename) {
 

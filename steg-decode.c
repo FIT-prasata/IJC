@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
             if (bitset_getbit(set_name, i) == 0) {
 
                 // Store the LSB of character on index from 0 to 7 based on the value of bit_shift
-                *secret_message |= ((p->data[i] &= HEX_ONE) << ((unsigned long)bit_shift++));
+                *secret_message |= ((p->data[i] & HEX_ONE) << ((unsigned long)bit_shift++));
 
                 // Separate 8 bit characters
                 if ((bit_shift % CHAR_BIT) == 0) {
