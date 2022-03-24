@@ -103,7 +103,17 @@ OR
 chcp 65001
 ```
 
-### It is a good practice to clean .o files after yourself
+### Destroy .o files
 ```bash
 make clean
+```
+
+### Enlarge stack for Windows
+```bash
+-Wl,--stack,38000000
+```
+
+### Enlarge stack for Linux
+```bash
+ulimit -s 38000 
 ```

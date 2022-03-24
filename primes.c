@@ -24,7 +24,7 @@ int main(void) {
     start = clock();
     
     // Bitset init
-    bitset_alloc(set_name, PRIMES_RANGE);
+    bitset_create(set_name, PRIMES_RANGE);
 
     Eratosthenes(set_name);
 
@@ -45,8 +45,6 @@ int main(void) {
     }
     // Print execution time of the program
     fprintf(stderr, "Time=%.3g\n", (double)(clock()-start)/CLOCKS_PER_SEC);
-
-    free(set_name);
     
     return 0;
 }

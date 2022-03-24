@@ -46,6 +46,8 @@ error-i.o: error.c
 
 # BUILD TASK A EXECUTABLES
 
+# ADD -Wl,--stack,38000000 BEHIND THE CFLAGS TO WORK ON WINDOWS OR ulimit -s 38000 FOR LINUX
+
 primes: eratosthenes.o bitset.o primes.o error.o
 	$(CC) $(CFLAGS) eratosthenes.o bitset.o primes.o error.o -o primes $(LIBS)
 
