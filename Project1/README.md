@@ -1,7 +1,11 @@
-# IJC
-My solution to IJC projects
+# IJC PROJECT 1
+My solution to first IJC project
 
-Compilation: gcc -g -std=c11 -pedantic -Wall -Wextra (optional -fsanitize=address for memory check)
+## Compilation:
+
+```bash
+gcc -g -std=c11 -pedantic -Wall -Wextra (optional -fsanitize=address for memory check)
+```
 
 ## TASK A
 

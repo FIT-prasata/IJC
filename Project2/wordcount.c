@@ -1,0 +1,1 @@
+// C program generated from C++ version with same output
