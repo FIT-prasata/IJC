@@ -1,6 +1,6 @@
 # IJC
 
-My solution to IJC projects
+My solution to IJC projects at VUT FIT (second semester)
 
 ## Project 1
 
