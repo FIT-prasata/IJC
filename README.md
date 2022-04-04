@@ -1,6 +1,6 @@
 # IJC
 
-My solution to IJC projects at VUT FIT (second semester)
+My solution to The C programming language class projects at VUT FIT (second semester)
 
 ## Project 1
 
