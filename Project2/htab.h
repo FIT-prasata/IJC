@@ -10,27 +10,20 @@
 #ifndef __HTAB_H__
 #define __HTAB_H__
 
+// LOCAL INCLUDES
+#include "structs.h"
+
 // EXTERNAL INCLUDES
 #include <string.h>     // size_t
 #include <stdbool.h>    // bool
 #include <stdint.h>     // uintX_t -> hash_function 
+#include <stdio.h>      // stderr
 
-// Tabulka:
-struct htab;                    // neúplná deklarace struktury - uživatel nevidí obsah
-typedef struct htab htab_t;     // typedef podle zadání
+// HASH TABLE
+struct htab;
+typedef struct htab htab_t;
 
-// Typy:
-typedef const char * htab_key_t;        // typ klíče
-typedef int htab_value_t;               // typ hodnoty
-
-// Dvojice dat v tabulce:
-typedef struct htab_pair {
-    htab_key_t    key;          // klíč
-    htab_value_t  value;        // asociovaná hodnota
-} htab_pair_t;                  // typedef podle zadání
-
-// Rozptylovací (hash) funkce (stejná pro všechny tabulky v programu)
-// Pokud si v programu definujete stejnou funkci, použije se ta vaše.
+// HASH FUNCTION
 size_t htab_hash_function(htab_key_t str);
 
 // Funkce pro práci s tabulkou:

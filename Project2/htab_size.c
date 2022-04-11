@@ -7,3 +7,11 @@
 // Compiled: gcc (GCC) 9.2.0
 // Git repository: https://github.com/lukaszavadil1/IJC
 
+// LOCAL INCLUDES
+#include "htab.h"
+#include "structs.h"
+
+// Returns the number of hash table items
+size_t htab_size(const htab_t * t) {
+    return t->size;
+}

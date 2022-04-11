@@ -7,3 +7,15 @@
 // Compiled: gcc (GCC) 9.2.0
 // Git repository: https://github.com/lukaszavadil1/IJC
 
+// LOCAL INCLUDES
+#include "htab.h"
+#include "structs.h"
+
+void htab_resize(htab_t *t, size_t newn) {
+    htab_t *tbl = realloc(t, newn * sizeof(struct htab_item) + sizeof(htab_t));
+    if (tbl == 0) {
+        return t;
+    }
+    tbl->arr_size = newn;
+    return tbl;
+}

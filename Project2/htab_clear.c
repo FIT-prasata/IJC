@@ -7,3 +7,15 @@
 // Compiled: gcc (GCC) 9.2.0
 // Git repository: https://github.com/lukaszavadil1/IJC
 
+// LOCAL INCLUDES
+#include "htab.h"
+#include "structs.h"
+
+void htab_clear(htab_t * t) {
+    for (int i = 0; i < t->arr_size; i++) {
+        if (htab_erase(t, t->arr_ptr[i]->pair.key) == 0) {
+            fprintf(stderr, "Chyba smazani prvku tabulky");
+        }
+    }
+    t->size = 0;
+}

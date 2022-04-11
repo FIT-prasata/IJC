@@ -7,3 +7,11 @@
 // Compiled: gcc (GCC) 9.2.0
 // Git repository: https://github.com/lukaszavadil1/IJC
 
+// LOCAL INCLUDES
+#include "htab.h"
+#include "structs.h"
+
+void htab_free(htab_t * t) {
+    htab_clear(t);
+    free(t);
+}
