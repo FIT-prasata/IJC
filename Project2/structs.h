@@ -36,7 +36,6 @@ typedef struct htab_item {
 
 typedef struct circ_arr {
     lines_t lines;
-    size_t start;
     size_t end;
     size_t size;
     size_t input_num;

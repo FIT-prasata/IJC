@@ -14,6 +14,7 @@
 // EXTERNAL INCLUDES
 #include <stdbool.h>
 
+// Erases hash table item from the hash table based on given key
 bool htab_erase(htab_t * t, htab_key_t key) {
     int index = (htab_hash_function(key) % t->arr_size);
     if ((t->arr_ptr[index] == NULL) || strncmp(t->arr_ptr[index]->pair.key, key, t->arr_size) != 0) {

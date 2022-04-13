@@ -11,6 +11,7 @@
 #include "htab.h"
 #include "structs.h"
 
+// Deletes all hash table items
 void htab_clear(htab_t * t) {
     for (int i = 0; i < t->arr_size; i++) {
         if (htab_erase(t, t->arr_ptr[i]->pair.key) == 0) {

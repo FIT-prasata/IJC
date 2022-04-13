@@ -11,8 +11,9 @@
 #include "htab.h"
 #include "structs.h"
 
+// Changes the size of hash table based on the newn parameter
 void htab_resize(htab_t *t, size_t newn) {
-    htab_t *tbl = realloc(t, newn * sizeof(struct htab_item) + sizeof(htab_t));
+    htab_t *tbl = realloc(t->size * sizeof(struct htab_item) + sizeof(htab_t), newn * sizeof(struct htab_item) + sizeof(htab_t));
     if (tbl == 0) {
         return t;
     }

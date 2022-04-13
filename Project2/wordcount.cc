@@ -1,4 +1,12 @@
-// wordcount-.cc
+// Name: wordcount.cc
+// IJC-DU2 Solution
+// Task: B
+// Start date: 28.3.2022
+// Author: Lukáš Zavadil
+// Faculty: FIT
+// Compiled: gcc (GCC) 9.2.0
+// Git repository: https://github.com/lukaszavadil1/IJC
+
 // Použijte: g++ -O2
 // Příklad použití STL kontejneru unordered_map<>
 // Program počítá četnost slov ve vstupním textu,

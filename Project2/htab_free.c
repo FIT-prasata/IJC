@@ -11,6 +11,7 @@
 #include "htab.h"
 #include "structs.h"
 
+// Frees allocated memory for the whole hash table
 void htab_free(htab_t * t) {
     htab_clear(t);
     free(t);

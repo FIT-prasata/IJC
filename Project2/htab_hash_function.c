@@ -10,6 +10,7 @@
 // LOCAL INCLUDES
 #include "htab.h"
 
+// SDBM hash function
 size_t htab_hash_function(const char *str) {
           uint32_t h = 0;
           const unsigned char *p;

@@ -11,7 +11,7 @@
 #include "htab.h"
 #include "structs.h"
 
-// Allocates memory for the table sturct and for n items
+// Allocates memory for the hash table struct and for its n items
 htab_t *htab_init(size_t n) {
     htab_t *tbl = malloc(n * sizeof(struct htab_item) + sizeof(htab_t));
     if (tbl == 0) {
