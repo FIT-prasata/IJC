@@ -12,12 +12,12 @@
 #include "structs.h"
 
 // WORKS !!!
-bool htab_insert(htab_t *t, htab_key_t key) {
-	if (t->arr_ptr == NULL) { return false; }
-	htab_item_t *tmp = htab_item_init(key);
-	int index = (htab_hash_function(key) % t->arr_size);
-	tmp->next = t->arr_ptr[index];
-	t->arr_ptr[index] = tmp;
-    t->size++;
-	return true;
+htab_item_t *htab_item_init(htab_key_t key) {
+	htab_item_t *item = malloc(sizeof(htab_item_t));
+	if (item == 0) return NULL;
+	item->pair.key = malloc(strlen(key)+1);
+	memcpy(item->pair.key, key, strlen(key)+1);
+	item->next = NULL;
+	item->pair.value = 0;
+	return item;
 }
