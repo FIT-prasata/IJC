@@ -17,6 +17,7 @@ void htab_resize(htab_t *t, size_t newn) {
     if (tbl == 0) {
         return t;
     }
+    
     tbl->arr_size = newn;
     return tbl;
 }

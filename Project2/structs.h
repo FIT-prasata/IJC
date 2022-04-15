@@ -7,15 +7,15 @@
 // Compiled: gcc (GCC) 9.2.0
 // Git repository: https://github.com/lukaszavadil1/IJC
 
+#ifndef __STRUCTS_H__
+#define __STRUCTS_H__
+
 // LOCAL INCLUDES
 #include "htab.h"
 
 // TYPES
 typedef const char * htab_key_t;
 typedef int htab_value_t;
-
-typedef char ** lines_t;
-typedef char * line_t;
 
 // STRUCTS
 struct htab {
@@ -34,9 +34,4 @@ typedef struct htab_item {
     struct htab_item *next;
 } htab_item_t;
 
-typedef struct circ_arr {
-    lines_t lines;
-    size_t end;
-    size_t size;
-    size_t input_num;
-} circ_arr_t;
+#endif

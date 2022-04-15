@@ -10,9 +10,6 @@
 #ifndef __HTAB_H__
 #define __HTAB_H__
 
-// LOCAL INCLUDES
-#include "structs.h"
-
 // EXTERNAL INCLUDES
 #include <string.h>     // size_t
 #include <stdbool.h>    // bool
@@ -40,6 +37,8 @@ htab_pair_t * htab_find(htab_t * t, htab_key_t key);  // hledání
 htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key);
 
 bool htab_erase(htab_t * t, htab_key_t key);    // ruší zadaný záznam
+
+bool htab_insert(htab_t *t, htab_key_t key);    // prida záznam do tabulky
 
 // for_each: projde všechny záznamy a zavolá na ně funkci f
 // Pozor: f nesmí měnit klíč .key ani přidávat/rušit položky
