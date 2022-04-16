@@ -27,7 +27,6 @@ bool htab_erase(htab_t * t, htab_key_t key) {
     if (prev == NULL) { t->arr_ptr[index] = curr->next; }
     else { prev->next = curr->next; }
     curr->next = NULL;
-    free(curr->pair.key);
     free(curr);
     return true;
 }

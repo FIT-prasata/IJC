@@ -13,10 +13,6 @@
 // LOCAL INCLUDES
 #include "htab.h"
 
-// TYPES
-typedef const char * htab_key_t;
-typedef int htab_value_t;
-
 // STRUCTS
 struct htab {
     size_t size;
@@ -24,14 +20,12 @@ struct htab {
     htab_item_t **arr_ptr;
 };
 
-typedef struct htab_pair {
-    htab_key_t key;
-    htab_value_t value;
-} htab_pair_t;
-
-typedef struct htab_item {
+struct htab_item {
     struct htab_pair pair;
     struct htab_item *next;
-} htab_item_t;
+};
+
+htab_item_t *htab_item_init(htab_key_t key); 
+bool htab_insert(htab_t *t, htab_key_t key);
 
 #endif

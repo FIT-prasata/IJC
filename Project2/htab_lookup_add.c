@@ -12,15 +12,14 @@
 #include "structs.h"
 
 // Returns item linked to given key if it exists, otherwise creates a new item
+
 htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key) {
-    int index = (htab_hash_function(key) % t->arr_size);
-    htab_item_t *tmp = t->arr_ptr[index]; 
-    while (tmp != NULL && strcmp(tmp->pair.key, key) != 0) {
-        tmp = tmp->next;
+    htab_pair_t *pair_ptr;
+    if (htab_find(t, key) == NULL) {
+        if (htab_insert(t, key) == false) fprintf(stderr, "Chyba pri vkladani");
+        pair_ptr = htab_find(t, key);
+        return pair_ptr;
     }
-    if (tmp == NULL) { 
-        htab_insert(t, key);
-        // RETURN 
-    }
-    return tmp;
+    pair_ptr = htab_find(t, key);
+    return pair_ptr;
 }

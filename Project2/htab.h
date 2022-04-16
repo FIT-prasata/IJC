@@ -15,10 +15,22 @@
 #include <stdbool.h>    // bool
 #include <stdint.h>     // uintX_t -> hash_function 
 #include <stdio.h>      // stderr
+#include <stdlib.h>
 
 // HASH TABLE
 struct htab;
 typedef struct htab htab_t;
+
+struct htab_item;
+typedef struct htab_item htab_item_t;
+
+typedef const char * htab_key_t;
+typedef int htab_value_t;
+
+typedef struct htab_pair {
+    htab_key_t key;
+    htab_value_t value;
+} htab_pair_t;
 
 // HASH FUNCTION
 size_t htab_hash_function(htab_key_t str);

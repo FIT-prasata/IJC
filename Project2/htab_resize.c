@@ -13,11 +13,23 @@
 
 // Changes the size of hash table based on the newn parameter
 void htab_resize(htab_t *t, size_t newn) {
-    htab_t *tbl = realloc(t->size * sizeof(struct htab_item) + sizeof(htab_t), newn * sizeof(struct htab_item) + sizeof(htab_t));
-    if (tbl == 0) {
-        return t;
+    const char *key_arr[t->size];
+    size_t key_num = 0;
+    for (size_t i = 0; i < t->arr_size; i++) {
+        htab_item_t *tmp = t->arr_ptr[i];
+        while (tmp != NULL) {
+            key_arr[key_num++] = tmp->pair.key;
+            tmp = tmp->next;
+        }
     }
-    
-    tbl->arr_size = newn;
-    return tbl;
+    htab_clear(t);
+    t->arr_ptr = realloc(t->arr_ptr, newn * sizeof(htab_item_t*));
+    t->arr_size = newn;
+    t->size = 0;
+    for (size_t i = 0; i < t->arr_size; i++) {
+        t->arr_ptr[i] = NULL;
+    }
+    for (size_t i = 0; i < key_num; i++) {
+        htab_insert(t, key_arr[i]);
+    }
 }

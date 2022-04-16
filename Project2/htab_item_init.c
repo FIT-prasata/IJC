@@ -1,4 +1,4 @@
-// Name: htab_insert.c
+// Name: htab_item_init.c
 // IJC-DU2 Solution
 // Task: B
 // Start date: 28.3.2022
@@ -15,8 +15,7 @@
 htab_item_t *htab_item_init(htab_key_t key) {
 	htab_item_t *item = malloc(sizeof(htab_item_t));
 	if (item == 0) return NULL;
-	item->pair.key = malloc(strlen(key)+1);
-	memcpy(item->pair.key, key, strlen(key)+1);
+	item->pair.key = key;
 	item->next = NULL;
 	item->pair.value = 0;
 	return item;
