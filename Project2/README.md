@@ -17,10 +17,8 @@ g++ -std=c++17 -pedantic -Wall {file}.cc
 
 ## TODO
 
-### tail.c
+### wordcount.c
 
-### htab_init.c
+### update Makefile
 
-### hrab_size.c
-
-### htab_bucket_count.c
+### testing
