@@ -16,10 +16,12 @@ Decode a secret message from the .ppm file using bit field functions from task A
 
 ## Project 2
 
+?/15 points
+
 ### TASK A
 
-TODO
+Implement your own tail function (prints last n number of lines in a given file)
 
 ### TASK B
 
-TODO
+Rewrite C++ file (wordcount.cc) in C (wordcount.c) using hash table functions as a substitute for unordered_map C++ feature
