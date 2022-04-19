@@ -13,13 +13,24 @@
 
 // Deletes all hash table items
 void htab_clear(htab_t * t) {
+    htab_item_t *tmp;
+    htab_item_t *curr;
+    size_t before_size = t->arr_size;
     for (size_t i = 0; i < t->arr_size; i++) {
-        while (t->arr_ptr[i] != NULL) {
-            htab_item_t *tmp = t->arr_ptr[i]->next;
-            if (htab_erase(t, t->arr_ptr[i]->pair.key) == false) fprintf(stderr, "Chyba mazani");
-            t->arr_ptr[i] = tmp;
+        if (t->arr_size != before_size) {
+            i = 0;
+            before_size = t->arr_size;
         }
-        t->arr_ptr[i] = NULL;
+        curr = t->arr_ptr[i];
+        while (curr != NULL) {
+            tmp = curr;
+            curr = curr->next;
+            if (htab_erase(t, tmp->pair.key) == false) fprintf(stderr, "Chyba mazani\n");
+            if (before_size != t->arr_size) {
+                i = -1;
+                break;
+            }
+        }
     }
     t->size = 0;
 }

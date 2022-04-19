@@ -19,13 +19,14 @@
 
 // DEFINES
 #define MAX_WORD_LEN 127
+#define HASH_TABLE_SIZE 31
 
 int main(void) {
     FILE *file;
     file = stdin;
 
     htab_t *table;
-    if ((table = htab_init(13)) == NULL) {
+    if ((table = htab_init(HASH_TABLE_SIZE)) == NULL) {
         fprintf(stderr, "Chyba alokace");
         return -1;
     };

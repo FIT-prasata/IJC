@@ -25,9 +25,20 @@ void htab_resize(htab_t *t, size_t newn) {
         }
     }
 
-    ////// CLEAR
-    htab_clear(t);
-    //////
+    // CLEAR
+    htab_item_t *item;
+    htab_item_t *toFree;
+    for(size_t i = 0; i < t->arr_size; i++){
+        item = t->arr_ptr[i];
+        while(item != NULL){
+            toFree = item;
+            item = item->next;
+            free((char *)toFree->pair.key);
+            free(toFree);
+        }
+        t->arr_ptr[i] = NULL;
+    }
+    // END CLEAR
 
     t->arr_ptr = realloc(t->arr_ptr, newn * sizeof(htab_item_t*));
     t->arr_size = newn;
@@ -38,5 +49,8 @@ void htab_resize(htab_t *t, size_t newn) {
     for (size_t i = 0; i < pair_index; i++) {
         htab_insert(t, pair_arr[i].key);
         htab_find(t, pair_arr[i].key)->value = pair_arr[i].value;
+    }
+    for (size_t i = 0; i < pair_index; i++) {
+        free((char *)pair_arr[i].key);
     }
 }
