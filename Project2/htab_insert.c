@@ -11,7 +11,7 @@
 #include "htab.h"
 #include "structs.h"
 
-// WORKS !!!
+// Inserts an item to hash table
 bool htab_insert(htab_t *t, htab_key_t key) {
 	if (t->arr_ptr == NULL) { return false; }
 	htab_item_t *tmp = htab_item_init(key);

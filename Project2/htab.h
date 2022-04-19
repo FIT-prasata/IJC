@@ -17,12 +17,19 @@
 #include <stdio.h>      // stderr
 #include <stdlib.h>
 
+// DEFINES
+#define AVG_LEN_MIN 2
+#define AVG_LEN_MAX 3
+
 // HASH TABLE
 struct htab;
 typedef struct htab htab_t;
 
+// HASH TABLE ITEM
 struct htab_item;
 typedef struct htab_item htab_item_t;
+
+// HASH TABLE PAIR
 
 typedef const char * htab_key_t;
 typedef int htab_value_t;

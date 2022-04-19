@@ -13,6 +13,10 @@
 #include <string.h>
 #include <stdbool.h>
 
+// DEFINES, TYPEDEFS AND STRUCTS
+#define LINE_LENGTH_LIMIT 13
+#define DEFAULT_LINES 10
+
 typedef char ** lines_t;
 typedef char * line_t;
 
@@ -21,10 +25,6 @@ typedef struct circ_arr {
     size_t end;
     size_t size;
 } circ_arr_t;
-
-// DEFINES
-#define LINE_LENGTH_LIMIT 13
-#define DEFAULT_LINES 10
 
 // Array init function
 void arr_init(circ_arr_t *c, int num_lines) {

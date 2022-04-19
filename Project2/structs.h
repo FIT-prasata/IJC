@@ -27,5 +27,6 @@ struct htab_item {
 
 htab_item_t *htab_item_init(htab_key_t key); 
 bool htab_insert(htab_t *t, htab_key_t key);
+void htab_print(htab_t *t);
 
 #endif

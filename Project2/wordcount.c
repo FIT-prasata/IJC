@@ -11,10 +11,30 @@
 
 // LOCAL INCLUDES
 #include "htab.h"
+#include "structs.h"
+#include "io.h"
 
 // EXTERNAL INCLUDES
-#include "stdlib.h"
+#include <stdlib.h>
+
+// DEFINES
+#define MAX_WORD_LEN 10
 
 int main(void) {
-    // TODO
+    FILE *file;
+    file = stdin;
+
+    htab_t *table;
+    if ((table = htab_init(4)) == NULL) {
+        fprintf(stderr, "Chyba alokace");
+        return -1;
+    };
+    char output[MAX_WORD_LEN + 1];
+    while(read_word(output, MAX_WORD_LEN, file) != EOF) {
+        htab_lookup_add(table, output)->value++;
+    }
+    htab_print(table);
+    htab_free(table);
+
+    return 0;
 }

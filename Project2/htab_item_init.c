@@ -11,11 +11,13 @@
 #include "htab.h"
 #include "structs.h"
 
-// WORKS !!!
+// Initializes hash table item
 htab_item_t *htab_item_init(htab_key_t key) {
 	htab_item_t *item = malloc(sizeof(htab_item_t));
 	if (item == 0) return NULL;
-	item->pair.key = key;
+	char *tmp = malloc(strlen(key) + 1);
+	strcpy(tmp, key);
+	item->pair.key = tmp;
 	item->next = NULL;
 	item->pair.value = 0;
 	return item;

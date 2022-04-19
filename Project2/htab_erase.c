@@ -19,6 +19,7 @@ bool htab_erase(htab_t * t, htab_key_t key) {
     int index = (htab_hash_function(key) % t->arr_size);
     htab_item_t *curr = t->arr_ptr[index];
     htab_item_t *prev = NULL;
+
     while (curr != NULL && strcmp(curr->pair.key, key) != 0) {
         prev = curr;
         curr = curr->next;
@@ -27,6 +28,9 @@ bool htab_erase(htab_t * t, htab_key_t key) {
     if (prev == NULL) { t->arr_ptr[index] = curr->next; }
     else { prev->next = curr->next; }
     curr->next = NULL;
+    free((char *)curr->pair.key);
     free(curr);
+    t->size--;
+    if (((t->size / t->arr_size) < AVG_LEN_MIN) && t->arr_size > 1) { htab_resize(t, t->arr_size / 2); }
     return true;
 }

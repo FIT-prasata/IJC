@@ -1,4 +1,4 @@
-// Name: read_word.c
+// Name: io.h
 // IJC-DU2 Solution
 // Task: B
 // Start date: 28.3.2022
@@ -7,8 +7,11 @@
 // Compiled: gcc (GCC) 9.2.0
 // Git repository: https://github.com/lukaszavadil1/IJC
 
-// LOCAL INCLUDES
-#include "htab.h"
-#include "structs.h"
+// EXTERNAL INCLUDES
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <stdbool.h>
+#include <string.h>
 
 int read_word(char *s, int max, FILE *f);

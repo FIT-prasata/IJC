@@ -11,19 +11,16 @@
 #include "htab.h"
 #include "structs.h"
 
-
+// Executes given function for each item of the hash table
 void htab_for_each(const htab_t * t, void (*f)(htab_pair_t *data)) {
-    htab_pair_t *tmp_pair = malloc(sizeof(htab_pair_t));
+    htab_key_t tmp_key;
     for (size_t i = 0; i < t->arr_size; i++) {
         htab_item_t *tmp = t->arr_ptr[i];
         while (tmp != NULL) {
-            tmp_pair = (&tmp->pair);
+            tmp_key = tmp->pair.key;
             (f)(&tmp->pair);
-            tmp->pair = *tmp_pair;
-            print_pair(&tmp->pair);
+            tmp->pair.key = tmp_key;
             tmp = tmp->next;
-            // TODO
         }
     }
-    free(tmp_pair);
 }
