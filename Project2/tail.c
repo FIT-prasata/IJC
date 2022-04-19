@@ -14,7 +14,7 @@
 #include <stdbool.h>
 
 // DEFINES, TYPEDEFS AND STRUCTS
-#define LINE_LENGTH_LIMIT 13
+#define LINE_LENGTH_LIMIT 127
 #define DEFAULT_LINES 10
 
 typedef char ** lines_t;
@@ -67,9 +67,9 @@ void arr_print(circ_arr_t *c) {
 }
 
 int main(const int argc, const char **argv) {
-    FILE *file;
+    FILE *file = stdin;
     circ_arr_t c;
-    char buf[LINE_LENGTH_LIMIT];
+    char buf[LINE_LENGTH_LIMIT] = {'\0'};
     char *end_ptr;
     int n, ch;
     bool overflow = false;
@@ -81,7 +81,16 @@ int main(const int argc, const char **argv) {
             arr_init(&c, DEFAULT_LINES);
 
             // Copy lines to array from stdin
-            while (fgets(buf, LINE_LENGTH_LIMIT, stdin) != NULL) {
+            while (fgets(buf, LINE_LENGTH_LIMIT, file) != NULL) {
+                if (buf[LINE_LENGTH_LIMIT-2] != '\0') {
+                    if (overflow == false) {
+                        fprintf(stderr, "Radek presahuje maximalni limit znaku, radky budou zkraceny\n");
+                        overflow = true;
+                    }
+                    buf[LINE_LENGTH_LIMIT-3] = '\n';
+                    buf[LINE_LENGTH_LIMIT-2] = '\0';
+                    while ((ch = fgetc(file)) != '\n' && ch != EOF);
+                }
                 arr_add(&c, buf);
             }
 
@@ -101,6 +110,15 @@ int main(const int argc, const char **argv) {
 
             // Copy lines to array from file
             while (fgets(buf, LINE_LENGTH_LIMIT, file) != NULL) {
+                if (buf[LINE_LENGTH_LIMIT-2] != '\0') {
+                    if (overflow == false) {
+                        fprintf(stderr, "Radek presahuje maximalni limit znaku, radky budou zkraceny\n");
+                        overflow = true;
+                    }
+                    buf[LINE_LENGTH_LIMIT-3] = '\n';
+                    buf[LINE_LENGTH_LIMIT-2] = '\0';
+                    while ((ch = fgetc(file)) != '\n' && ch != EOF);
+                }
                 arr_add(&c, buf);
             }
 
@@ -108,13 +126,13 @@ int main(const int argc, const char **argv) {
         case 3: // Usage: [-n] [number of lines] <[filename]
 
             // First argument validation
-            if (strcmp(argv[1], "-n") == 1) {
+            if (strcmp(argv[1], "-n") != 0) {
                 fprintf(stderr, "Spatny argument %s\n", argv[1]);
                 return -1;
             }
 
             // Second argument validation
-            n = strtoul(argv[2], NULL, 10);
+            n = strtoul(argv[2], &end_ptr, 10);
             if (strcmp(end_ptr, "") != 0) {
                 fprintf(stderr, "Spatny argument %s\n", argv[2]);
                 return -1;
@@ -124,7 +142,16 @@ int main(const int argc, const char **argv) {
             arr_init(&c, abs(n));
 
             // Copy lines to array from stdin
-            while (fgets(buf, LINE_LENGTH_LIMIT, stdin) != NULL) {
+            while (fgets(buf, LINE_LENGTH_LIMIT, file) != NULL) {
+                if (buf[LINE_LENGTH_LIMIT-2] != '\0') {
+                    if (overflow == false) {
+                        fprintf(stderr, "Radek presahuje maximalni limit znaku, radky budou zkraceny\n");
+                        overflow = true;
+                    }
+                    buf[LINE_LENGTH_LIMIT-3] = '\n';
+                    buf[LINE_LENGTH_LIMIT-2] = '\0';
+                    while ((ch = fgetc(file)) != '\n' && ch != EOF);
+                }
                 arr_add(&c, buf);
             }
 
@@ -132,7 +159,7 @@ int main(const int argc, const char **argv) {
         case 4: // Usage: [-n] [number of lines] [filename]
 
             // First argument validation
-            if (strcmp(argv[1], "-n") == 1) {
+            if (strcmp(argv[1], "-n") != 0) {
                 fprintf(stderr, "Spatny argument %s\n", argv[1]);
                 return 1;
             }

@@ -26,28 +26,7 @@ void htab_resize(htab_t *t, size_t newn) {
     }
 
     ////// CLEAR
-    for (size_t i = 0; i < t->arr_size; i++) {
-        while (t->arr_ptr[i] != NULL) {
-            htab_item_t *tmp = t->arr_ptr[i]->next;
-            int index = (htab_hash_function(t->arr_ptr[i]->pair.key) % t->arr_size);
-            htab_item_t *curr = t->arr_ptr[index];
-            htab_item_t *prev = NULL;
-
-            while (curr != NULL && strcmp(curr->pair.key, t->arr_ptr[i]->pair.key) != 0) {
-                prev = curr;
-                curr = curr->next;
-            }
-            if (prev == NULL) { t->arr_ptr[index] = curr->next; }
-            else { prev->next = curr->next; }
-            curr->next = NULL;
-            free((char *)curr->pair.key);
-            free(curr);
-            t->size--;
-            t->arr_ptr[i] = tmp;
-        }
-        t->arr_ptr[i] = NULL;
-    }
-    t->size = 0;
+    htab_clear(t);
     //////
 
     t->arr_ptr = realloc(t->arr_ptr, newn * sizeof(htab_item_t*));

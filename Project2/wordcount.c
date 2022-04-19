@@ -18,14 +18,14 @@
 #include <stdlib.h>
 
 // DEFINES
-#define MAX_WORD_LEN 10
+#define MAX_WORD_LEN 127
 
 int main(void) {
     FILE *file;
     file = stdin;
 
     htab_t *table;
-    if ((table = htab_init(4)) == NULL) {
+    if ((table = htab_init(13)) == NULL) {
         fprintf(stderr, "Chyba alokace");
         return -1;
     };
