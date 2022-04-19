@@ -12,24 +12,32 @@
 
 // Reads one word from the given file and returns its length if the file is not empty, else returns EOF
 int read_word(char *s, int max, FILE *f) {
-    int c;
-    int index = 0;
+    int character, arr_index = 0;
 
-    while (isspace(c = getc(f)) && c != EOF);
-    s[index++] = c;
+    // Searches for first char of word
+    while (isspace(character = getc(f)) && character != EOF);
+    s[arr_index++] = character;
 
-    while (!(isspace(c = getc(f))))
+    // Loads characters to array until it reaches isspace character or EOF
+    while ((isspace(character = getc(f))) == 0)
     {
-        if (c == EOF)
+        if (character == EOF)
             return EOF;
-        s[index++] = c;
-        if (index == max - 1)
+
+        s[arr_index++] = character;
+
+        // Longer strings handle
+        if (arr_index == (max - 1))
         {
-            while (isspace(c = getc(f)) && c != EOF);
-            s[index] = '\0';
-            return index + 1;
+            // Skips rest of the characters after reaching word size implementation limit
+            while (isspace(character = getc(f)) && character != EOF);
+
+            // Closes longer strings
+            s[arr_index++] = '\0';
+            return arr_index;
         }
     }
-    s[index] = '\0';
-    return index + 1; 
+    // Closes strings if they somehow miss the '\0' character
+    s[arr_index++] = '\0';
+    return arr_index; 
 }

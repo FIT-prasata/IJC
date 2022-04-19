@@ -21,7 +21,7 @@ void htab_print(htab_t *t){
             printf("\t%i\t ", i);
             htab_item_t *tmp = t->arr_ptr[i];
             while(tmp != NULL){
-                printf("[%s, %d] - ", tmp->pair.key, tmp->pair.value);
+                printf("[%s\t%d] - ", tmp->pair.key, tmp->pair.value);
                 tmp = tmp->next;
             }
             printf("\n");
