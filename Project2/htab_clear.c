@@ -18,22 +18,30 @@ void htab_clear(htab_t * t) {
     size_t before_size = t->arr_size;
 
     // Loops through all items
-    for (size_t i = 0; i < t->arr_size; i++) {
-        if (t->arr_size != before_size) {
-            i = 0;
-            before_size = t->arr_size;
-        }
+    for (size_t i = 0; i < t->arr_size; ++i) {
         curr = t->arr_ptr[i];
+
+        // Loops through all items of the linked list
         while (curr != NULL) {
             tmp = curr;
             curr = curr->next;
+
+            // Erase hash table item
             if (htab_erase(t, tmp->pair.key) == false) fprintf(stderr, "Chyba mazani\n");
-            // Hash table resize handler
+
+            // Check if the hash table has resized
             if (before_size != t->arr_size) {
+
+                // Starts looping from the first index
                 i = -1;
+
+                // Saves current size to temp variable
+                before_size = t->arr_size;
+
                 break;
             }
         }
     }
+    
     t->size = 0;
 }

@@ -14,7 +14,7 @@
 #include <stdbool.h>
 
 // DEFINES, TYPEDEFS AND STRUCTS
-#define LINE_LENGTH_LIMIT 127
+#define LINE_LENGTH_LIMIT 4098
 #define DEFAULT_LINES 10
 
 typedef char ** lines_t;

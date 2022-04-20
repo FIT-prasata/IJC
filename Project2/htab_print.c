@@ -13,22 +13,12 @@
 
 // Prints the hash table
 void htab_print(htab_t *t){
-    printf("Start of hash table\n");
     for(int i = 0; i < (int)t->arr_size; i++){
-
-        // Print array pointer to zero items
-        if (t->arr_ptr[i] == NULL){ printf("\t%i\t---\n", i); }
-
+        htab_item_t *tmp = t->arr_ptr[i];
         // Print all items in linked list
-        else{
-            printf("\t%i\t ", i);
-            htab_item_t *tmp = t->arr_ptr[i];
-            while(tmp != NULL){
-                printf("[%s\t%d] - ", tmp->pair.key, tmp->pair.value);
-                tmp = tmp->next;
-            }
-            printf("\n");
+        while(tmp != NULL){
+            printf("%s\t%d\n", tmp->pair.key, tmp->pair.value);
+            tmp = tmp->next;
         }
     }
-    printf("End of hash table\n");
 }

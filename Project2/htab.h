@@ -11,10 +11,10 @@
 #define __HTAB_H__
 
 // EXTERNAL INCLUDES
-#include <string.h>     // size_t
-#include <stdbool.h>    // bool
-#include <stdint.h>     // uintX_t -> hash_function 
-#include <stdio.h>      // stderr
+#include <string.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 
 // DEFINES
@@ -30,7 +30,6 @@ struct htab_item;
 typedef struct htab_item htab_item_t;
 
 // HASH TABLE PAIR
-
 typedef const char * htab_key_t;
 typedef int htab_value_t;
 
@@ -42,26 +41,34 @@ typedef struct htab_pair {
 // HASH FUNCTION
 size_t htab_hash_function(htab_key_t str);
 
-// Funkce pro práci s tabulkou:
-htab_t *htab_init(size_t n);                    // konstruktor tabulky
+// HASH TABLE CONSTRUCTOR
+htab_t *htab_init(size_t n);
 
-size_t htab_size(const htab_t * t);             // počet záznamů v tabulce
+// RETURNS NUMBER OF HASH TABLE ITEMS
+size_t htab_size(const htab_t * t);
 
-size_t htab_bucket_count(const htab_t * t);     // velikost pole
+// RETURNS NUMBER OF HASH TABLE ITEM POINTERS
+size_t htab_bucket_count(const htab_t * t);
 
-void htab_resize(htab_t *t, size_t newn);       // změna velikosti pole
-                                                // (umožňuje rezervaci místa)
+// HASH TABLE RESIZE
+void htab_resize(htab_t *t, size_t newn);
 
-htab_pair_t * htab_find(htab_t * t, htab_key_t key);  // hledání
+// HASH TABLE FIND ITEM
+htab_pair_t * htab_find(htab_t * t, htab_key_t key);
+
+// HASH TABLE FIND OR ADD ITEM
 htab_pair_t * htab_lookup_add(htab_t * t, htab_key_t key);
 
-bool htab_erase(htab_t * t, htab_key_t key);    // ruší zadaný záznam
+// HASH TABLE ERASE ITEM
+bool htab_erase(htab_t * t, htab_key_t key);
 
-// for_each: projde všechny záznamy a zavolá na ně funkci f
-// Pozor: f nesmí měnit klíč .key ani přidávat/rušit položky
+// CALLS FUNCTION FOR EACH HASH TABLE ITEM
 void htab_for_each(const htab_t * t, void (*f)(htab_pair_t *data));
 
-void htab_clear(htab_t * t);    // ruší všechny záznamy
-void htab_free(htab_t * t);     // destruktor tabulky
+// DELTES ALL ITEMS IN HASH TABLE
+void htab_clear(htab_t * t);
 
-#endif // __HTAB_H__
+// DELETES HASH TABLE
+void htab_free(htab_t * t);
+
+#endif
