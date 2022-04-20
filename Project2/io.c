@@ -27,10 +27,10 @@ int read_word(char *s, int max, FILE *f) {
         s[arr_index++] = character;
 
         // Longer strings handle
-        if (arr_index == (max - 1))
+        if (arr_index == max)
         {
             // Skips rest of the characters after reaching word size implementation limit
-            while (isspace(character = getc(f)) && character != EOF);
+            while (!isspace(character = getc(f)) && character != EOF);
 
             // Closes longer strings
             s[arr_index++] = '\0';
@@ -38,6 +38,6 @@ int read_word(char *s, int max, FILE *f) {
         }
     }
     // Closes strings if they somehow miss the '\0' character
-    s[arr_index++] = '\0';
+    s[arr_index] = '\0';
     return arr_index; 
 }
