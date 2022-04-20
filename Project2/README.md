@@ -38,10 +38,16 @@ arr[0] = char first_char;
 arr[4094] = char last_char;
 arr[4095] = '\n'; // new line character
 arr[4096] = '\0'; // string end char
-arr[4097] = '\0'; // Safety string end char
+arr[4097] = '\0'; // safety string end char
 ```
 
 Prints warning message and continues with cut lines
+
+```c
+int n = strtoul({lines_num}, &end_ptr, 10);
+```
+
+Line size implementation limit
 
 ```c
 #define LINE_LENGTH_LIMIT 4098
@@ -95,6 +101,7 @@ wordcount-dynamic.exe
 Dynamic library
 
 ```bash
+export LD_LIBRARY_PATH="."
 ./wordcount-dynamic
 ```
 

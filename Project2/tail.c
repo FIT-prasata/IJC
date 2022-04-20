@@ -100,8 +100,7 @@ int main(const int argc, const char **argv) {
             // First argument validation
             file = fopen(argv[1], "r");
             if (file == 0) {
-                fprintf(stderr, "Nelze otevrit soubor %s", argv[1]);
-                fclose(file);
+                fprintf(stderr, "Nelze otevrit soubor %s\n", argv[1]);
                 return -1;
             }
 
@@ -133,6 +132,7 @@ int main(const int argc, const char **argv) {
 
             // Second argument validation
             n = strtoul(argv[2], &end_ptr, 10);
+            if (n == 0) {return 0; }
             if (strcmp(end_ptr, "") != 0) {
                 fprintf(stderr, "Spatny argument %s\n", argv[2]);
                 return -1;
@@ -166,6 +166,7 @@ int main(const int argc, const char **argv) {
 
             // Second argument validation
             n = strtoul(argv[2], &end_ptr, 10);
+            if (n == 0) {return 0; }
             if (strcmp(end_ptr, "") != 0) {
                 fprintf(stderr, "Spatny argument %s\n", argv[2]);
                 return -1;
@@ -175,7 +176,6 @@ int main(const int argc, const char **argv) {
             file = fopen(argv[3], "r");
             if (file == 0) {
                 fprintf(stderr, "Nelze otevrit soubor %s\n", argv[3]);
-                fclose(file);
                 return -1;
             }
 
