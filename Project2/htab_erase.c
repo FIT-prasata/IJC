@@ -20,17 +20,28 @@ bool htab_erase(htab_t * t, htab_key_t key) {
     htab_item_t *curr = t->arr_ptr[index];
     htab_item_t *prev = NULL;
 
+    // Searches for the item in linked list
     while (curr != NULL && strcmp(curr->pair.key, key) != 0) {
         prev = curr;
         curr = curr->next;
     }
+
+    // Returns false if the item is not found
     if (curr == NULL) { return false; }
+
+    // Item on first index handle
     if (prev == NULL) { t->arr_ptr[index] = curr->next; }
     else { prev->next = curr->next; }
     curr->next = NULL;
+
+    // Frees allocated memory
     free((char *)curr->pair.key);
     free(curr);
+
     t->size--;
+
+    // Checks if the hash table needs to be resized
     if (((t->size / t->arr_size) < AVG_LEN_MIN) && t->arr_size > 1) { htab_resize(t, t->arr_size / 2); }
+
     return true;
 }

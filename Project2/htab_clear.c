@@ -16,6 +16,8 @@ void htab_clear(htab_t * t) {
     htab_item_t *tmp;
     htab_item_t *curr;
     size_t before_size = t->arr_size;
+
+    // Loops through all items
     for (size_t i = 0; i < t->arr_size; i++) {
         if (t->arr_size != before_size) {
             i = 0;
@@ -26,6 +28,7 @@ void htab_clear(htab_t * t) {
             tmp = curr;
             curr = curr->next;
             if (htab_erase(t, tmp->pair.key) == false) fprintf(stderr, "Chyba mazani\n");
+            // Hash table resize handler
             if (before_size != t->arr_size) {
                 i = -1;
                 break;

@@ -14,12 +14,17 @@
 // Returns the item linked to a given key if it exists
 htab_pair_t *htab_find(htab_t * t, htab_key_t key) {
     int index = (htab_hash_function(key) % t->arr_size);
-    htab_item_t *tmp = t->arr_ptr[index]; 
+    htab_item_t *tmp = t->arr_ptr[index];
+
+    // Searches for the item in linked list
     while (tmp != NULL && strcmp(tmp->pair.key, key) != 0) {
         tmp = tmp->next;
     }
+
+    // Returns NULL if the item is not found
     if (tmp == NULL) { return NULL; }
 
     htab_pair_t *pair_ptr = &(tmp->pair);
+    
     return pair_ptr;
 }

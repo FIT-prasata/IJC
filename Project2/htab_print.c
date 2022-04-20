@@ -11,12 +11,15 @@
 #include "htab.h"
 #include "structs.h"
 
+// Prints the hash table
 void htab_print(htab_t *t){
-    printf("Start of htab\n");
+    printf("Start of hash table\n");
     for(int i = 0; i < (int)t->arr_size; i++){
-        if (t->arr_ptr[i] == NULL){
-            printf("\t%i\t---\n", i);
-        }
+
+        // Print array pointer to zero items
+        if (t->arr_ptr[i] == NULL){ printf("\t%i\t---\n", i); }
+
+        // Print all items in linked list
         else{
             printf("\t%i\t ", i);
             htab_item_t *tmp = t->arr_ptr[i];
@@ -27,5 +30,5 @@ void htab_print(htab_t *t){
             printf("\n");
         }
     }
-    printf("End of htab\n");
+    printf("End of hash table\n");
 }
