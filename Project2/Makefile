@@ -93,3 +93,10 @@ clean:
 
 win-clean:
 	del *.o tail.exe wordcount.exe wordcount-dynamic.exe libhtab.so libhtab.a
+
+pack:
+	zip $(XLOGIN) *.c *.h Makefile README.md
+
+unpack:
+	unzip $(XLOGIN).zip
+	rm $(XLOGIN).zip

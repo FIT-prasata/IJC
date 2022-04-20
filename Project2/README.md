@@ -139,6 +139,23 @@ make win-clean
 make clean
 ```
 
+## Zip
+
+Default .zip folder name
+```
+XLOGIN=xzavad20
+```
+
+Zips up data (*.c, *.h, Makefile and README.md)
+```bash
+make pack
+```
+
+Unzips data and deletes .zip folder
+```bash
+make unpack
+```
+
 ## TODO
 
-### testing
+### More testing :)
