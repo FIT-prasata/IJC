@@ -16,7 +16,7 @@ Decode a secret message from the .ppm file using bit field functions from task A
 
 ## Project 2
 
-?/15 points
+14.5/15 points
 
 ### TASK A
 
